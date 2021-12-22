@@ -68,98 +68,239 @@
           <h2 class="blog-post-title">Simple Linear Regression</h2>
           <!--<p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p> -->
 
-          <p>This page explains the project that I completed in conjunction with the Machine Learning Udemy.com course that I have been taking.</p>
+          <p>This page explains a project that I completed in conjunction with the Machine Learning Udemy.com course that I have been taking.</p>
           <hr>
           <p>I have been interested in Machine learning and Artificial Intelligence for some time. I knew that if I wanted to learn how to do anything releated to this field, that I would need some good resourses. I found the Udemy courses by Kirill Eremenko and Hadelin de Ponteves and decided to purchace a few of them.</p>
           <p>I have been working through the 'Machine Learning A-Z: Hands-On Python & R In Data Science' and have been learning how to build simple models.</p>
           <p>Below is an explanation of the 'Simple Linear Regression' model that I learned about from the course.</p>
+
           <h2>Heading</h2>
+
           <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-          <h3>Sub-heading</h3>
-          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-          <pre><code>Example code block</code></pre>
+
+          <h3>Importing the libraries</h3>
+          <p>The first step is to import the libraries. We can do this with the following code:</p>
+          <pre><code>
+            import numpy as np
+            import matplotlib.pyplot as plt
+            import pandas as pd
+          </code></pre>
           <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <h3>Sub-heading</h3>
-          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <ul>
-            <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-            <li>Donec id elit non mi porta gravida at eget metus.</li>
-            <li>Nulla vitae elit libero, a pharetra augue.</li>
-          </ul>
-          <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-          <ol>
-            <li>Vestibulum id ligula porta felis euismod semper.</li>
-            <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-            <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-          </ol>
-          <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+
+          <h3>Importing the dataset</h3>
+          <p>The next step is to import the dataset. We can do this with the following code:</p>
+          <pre><code>
+            dataset = pd.read_csv('Salary_Data.csv')
+            X = dataset.iloc[:, :-1].values
+            y = dataset.iloc[:, -1].values
+          </code></pre>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+
+          <h3>Splitting the dataset into the Training set and Test set</h3>
+          <p>The next step is to split the dataset into the Training set and Test set. We can do this with the following code:</p>
+          <pre><code>
+          from sklearn.model_selection import train_test_split
+          X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 1/3, random_state = 0)
+        </code></pre>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+
+          <h3>Training the Simple Linear Regression model on the Training set</h3>
+          <p>The next step is to train the Simple Linear Regression model on the Training set. We can do this with the following code:</p>
+          <pre><code>
+            from sklearn.linear_model import LinearRegression
+            regressor = LinearRegression()
+            regressor.fit(X_train, y_train)
+        </code></pre>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+
+          <h3>Predicting the Test set results</h3>
+          <p>The next step is to predict the Test set results. We can do this with the following code:</p>
+          <pre><code>
+            y_pred = regressor.predict(X_test)
+        </code></pre>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+
+          <h3>Visualising the Training set results</h3>
+          <p>The next step is to visualise the Training set results. We can do this with the following code:</p>
+          <pre><code>
+            plt.scatter(X_train, y_train, color = 'red')
+            plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+            plt.title('Salary vs Experience (Training set)')
+            plt.xlabel('Years of Experience')
+            plt.ylabel('Salary')
+            plt.show()
+        </code></pre>
+          <p>This is where we get figure 2.</p>
+
+          <h3>Visualising the Test set results</h3>
+          <p>The next step is to visualise the Test set results. We can do this with the following code:</p>
+          <pre><code>
+            plt.scatter(X_test, y_test, color = 'red')
+            plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+            plt.title('Salary vs Experience (Test set)')
+            plt.xlabel('Years of Experience')
+            plt.ylabel('Salary')
+            plt.show()
+        </code></pre>
+          <p>This is where we get figure 3.</p>
+
+          <h3>Results</h3>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+
+
         </div><!-- /.blog-post -->
 
-        <div class="blog-post">
-          <h2 class="blog-post-title">Another blog post</h2>
-          <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
 
-          <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-          <blockquote>
-            <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          </blockquote>
-          <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-        </div><!-- /.blog-post -->
-
-        <div class="blog-post">
-          <h2 class="blog-post-title">New feature</h2>
-          <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
-
-          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <ul>
-            <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-            <li>Donec id elit non mi porta gravida at eget metus.</li>
-            <li>Nulla vitae elit libero, a pharetra augue.</li>
-          </ul>
-          <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-        </div><!-- /.blog-post -->
-
-        <nav class="blog-pagination">
-          <a class="btn btn-outline-primary" href="#">Older</a>
-          <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-        </nav>
 
       </div><!-- /.blog-main -->
 
       <aside class="col-md-4 blog-sidebar">
         <div class="p-4 mb-3 bg-light rounded">
           <h4 class="font-italic">About</h4>
-          <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          <p class="mb-0">Figure 1 shows the data table that was used to train the model.
+            Below that (figure 1 and figure 2) are the graphs that were created using the machine learning model.</p>
         </div>
 
         <div class="p-4">
-          <h4 class="font-italic">Archives</h4>
-          <ol class="list-unstyled mb-0">
-            <li><a href="#">March 2014</a></li>
-            <li><a href="#">February 2014</a></li>
-            <li><a href="#">January 2014</a></li>
-            <li><a href="#">December 2013</a></li>
-            <li><a href="#">November 2013</a></li>
-            <li><a href="#">October 2013</a></li>
-            <li><a href="#">September 2013</a></li>
-            <li><a href="#">August 2013</a></li>
-            <li><a href="#">July 2013</a></li>
-            <li><a href="#">June 2013</a></li>
-            <li><a href="#">May 2013</a></li>
-            <li><a href="#">April 2013</a></li>
-          </ol>
+          <h4 class="font-italic">Figure 1</h4>
+          <table class="data-table">
+           <tr>
+             <th>&nbsp;YearsExperience&nbsp;</th>
+             <th>&nbsp;Salary&nbsp;</th>
+           </tr>
+           <tr>
+             <td>1.1</td>
+             <td>39343.00</td>
+           </tr>
+           <tr>
+             <td>1.3</td>
+             <td>46205.00</td>
+           </tr>
+           <tr>
+             <td>1.5</td>
+             <td>37731.00</td>
+           </tr>
+           <tr>
+             <td>2.0</td>
+             <td>43525.00</td>
+           </tr>
+           <tr>
+             <td>2.2</td>
+             <td>39891.00</td>
+           </tr>
+           <tr>
+             <td>2.9</td>
+             <td>56642.00</td>
+           </tr>
+           <tr>
+             <td>3.0</td>
+             <td>60150.00</td>
+           </tr>
+           <tr>
+             <td>3.2</td>
+             <td>54445.00</td>
+           </tr>
+           <tr>
+             <td>3.2</td>
+             <td>64445.00</td>
+           </tr>
+           <tr>
+             <td>3.7</td>
+             <td>57189.00</td>
+           </tr>
+           <tr>
+             <td>3.9</td>
+             <td>63218.00</td>
+           </tr>
+           <tr>
+             <td>4.0</td>
+             <td>55794.00</td>
+           </tr>
+           <tr>
+             <td>4.0</td>
+             <td>56957.00</td>
+           </tr>
+           <tr>
+             <td>4.1</td>
+             <td>57081.00</td>
+           </tr>
+           <tr>
+             <td>4.5</td>
+             <td>61111.00</td>
+           </tr>
+           <tr>
+             <td>4.9</td>
+             <td>67938.00</td>
+           </tr>
+           <tr>
+             <td>5.1</td>
+             <td>66029.00</td>
+           </tr>
+           <tr>
+             <td>5.3</td>
+             <td>83088.00</td>
+           </tr>
+           <tr>
+             <td>5.9</td>
+             <td>81363.00</td>
+           </tr>
+           <tr>
+             <td>6.0</td>
+             <td>93940.00</td>
+           </tr>
+           <tr>
+             <td>6.8</td>
+             <td>91738.00</td>
+           </tr>
+           <tr>
+             <td>7.1</td>
+             <td>98273.00</td>
+           </tr>
+           <tr>
+             <td>7.9</td>
+             <td>101302.00</td>
+           </tr>
+           <tr>
+             <td>8.2</td>
+             <td>113812.00</td>
+           </tr>
+           <tr>
+             <td>8.7</td>
+             <td>109431.00</td>
+           </tr>
+           <tr>
+             <td>9.0</td>
+             <td>105582.00</td>
+           </tr>
+           <tr>
+             <td>9.5</td>
+             <td>116969.00</td>
+           </tr>
+           <tr>
+             <td>9.6</td>
+             <td>112635.00</td>
+           </tr>
+           <tr>
+             <td>10.3</td>
+             <td>122391.00</td>
+           </tr>
+           <tr>
+             <td>10.5</td>
+             <td>121872.00</td>
+           </tr>
+         </table>
         </div>
 
         <div class="p-4">
-          <h4 class="font-italic">Elsewhere</h4>
-          <ol class="list-unstyled">
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
-          </ol>
+          <h4 class="font-italic">Figure 2</h4>
+          <img src="images/simpleRegressionTraining.png" class="card-img-top" alt="Graph of Simple Regression Training">
         </div>
+
+        <div class="p-4">
+          <h4 class="font-italic">Figure 3</h4>
+          <img src="images/simpleRegressionTest.png" class="card-img-top" alt="Graph of Simple Regression Test">
+        </div>
+
       </aside><!-- /.blog-sidebar -->
 
     </div><!-- /.row -->
